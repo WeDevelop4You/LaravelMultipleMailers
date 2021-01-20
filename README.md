@@ -1,1 +1,1 @@
-LaravelMultipleMailers
+Laravel-MultipleMailers

@@ -1,0 +1,27 @@
+{
+    "name": "wedevelop4you/laravel-multiple-mailers",
+    "description": "Adds multiple mailers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Pascal Huberts",
+            "email": "contact@wedevelop4you.nl"
+        }
+    ],
+    "require": {
+        "php": "^7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeDevelop4You\\LaravelMultipleMailers\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WeDevelop4You\\LaravelMultipleMailers\\MailerServiceProvider"
+            ]
+        }
+    }
+}
