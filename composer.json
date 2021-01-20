@@ -23,5 +23,7 @@
                 "WeDevelop4You\\LaravelMultipleMailers\\MailerServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
