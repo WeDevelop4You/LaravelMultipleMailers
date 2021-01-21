@@ -1,9 +1,11 @@
 # Laravel Multiple Mailers
 
-I made this package because I wanted to use multiple mails. it is a small simple package to use multiple mails in Laravel. I'm not really going to expand it any further. only if I want to add functions myself. you are free to use the package and here is a little explanation of how to use it.
+I made this package because I wanted to use multiple mails. It is a small simple package to use multiple mails in Laravel. I'm not really going to expand it any further. Only if I want to add functions myself. You are free to use the package and here is a little explanation of how to use it.
 
 ## Installation
-PHP 7.0 or higher and tested on Laravel 7 are required.
+PHP 7.0 or higher and Laravel 7 are required.
+
+> Its only tested on Laravel 7
 
 Require this package with composer.
 
