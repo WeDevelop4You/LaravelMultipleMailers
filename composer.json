@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "WeDevelop4You\\laravel-multiple-mailers\\": "src/"
+            "WeDevelop4You\\LaravelMultipleMailers\\": "src/"
         }
     },
     "extra": {
