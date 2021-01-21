@@ -8,31 +8,33 @@ use WeDevelop4You\LaravelMultipleMailers\Exceptions\MailerAccountNotFoundExcepti
 trait Mailer
 {
 	/**
+	 * @param string $mailer
 	 * @return $this
 	 * @throws MailerAccountNotFoundException
 	 */
-	private function setMailer(): Mailer
+	private function setMailer(string $mailer)
 	{
-        $mailer = config("mailer.accounts.{$this->mailer}", false);
+        $mailer = config("mailer.accounts.{$mailer}", false);
 
         if ($mailer) {
             $name = $mailer['name'] ?? env('MAIL_FROM_NAME');
             $this->from($mailer['username'], $name);
         } else {
-            throw new MailerAccountNotFoundException("Mailer account \"{$this->mailer}\" is not found in config file mailer");
+            throw new MailerAccountNotFoundException("Mailer account \"{$mailer}\" is not found in config file mailer");
         }
 
 		return $this;
     }
 
 	/**
+	 * @param string $mailer
 	 * @param string $queue
-	 * @return Mailer
+	 * @return $this
 	 * @throws MailerAccountNotFoundException
 	 */
-	private function setMailerWithQueue(string $queue = 'mail'): Mailer
+	private function setMailerWithQueue(string $mailer, string $queue = 'mail')
 	{
 		$this->onQueue($queue);
-		return $this->setMailer();
+		return $this->setMailer($mailer);
 	}
 }
