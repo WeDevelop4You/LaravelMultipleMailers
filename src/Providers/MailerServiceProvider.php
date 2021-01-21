@@ -1,6 +1,6 @@
 <?php
 
-namespace WeDevelop4You\LaravelMultipleMailers;
+namespace WeDevelop4You\LaravelMultipleMailers\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use WeDevelop4You\LaravelMultipleMailers\Exceptions\MailerProviderNotFoundException;
