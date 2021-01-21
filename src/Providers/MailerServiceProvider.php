@@ -25,7 +25,7 @@ class MailerServiceProvider extends ServiceProvider
 	 */
     public function boot()
     {
-    	$this->publishes([__DIR__.'/../config/mailer.php' => config_path('mailer.php')], 'config');
+    	$this->publishes([__DIR__.'/../../config/mailer.php' => config_path('mailer.php')], 'config');
 
 		self::setMailerConfig();
     }
