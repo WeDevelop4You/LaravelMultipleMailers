@@ -14,7 +14,7 @@ class MailerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+		$this->mergeConfigFrom(__DIR__.'/../config/mailer.php', 'mailer');
     }
 
 	/**
@@ -25,9 +25,7 @@ class MailerServiceProvider extends ServiceProvider
 	 */
     public function boot()
     {
-    	$this->publishes([
-			__DIR__ . '/../config/mailer.php' => config_path('mailer.php'),
-		]);
+    	$this->publishes([__DIR__.'/../config/mailer.php' => config_path('mailer.php')], 'config');
 
 		self::setMailerConfig();
     }

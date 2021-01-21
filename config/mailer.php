@@ -2,7 +2,12 @@
 
     return [
     	/*
-    	 *
+    	 * 	'Choose a name for your mail config' => [
+         *		'username' => 'Your email address', (required)
+         *     	'password' => 'Your email password', (required)
+    	 * 		'name' => 'Your name send by the email' (The default name is MAIL_FROM_NAME in your .env file)
+    	 * 		'provider' => 'Your provider' (The default provider is default)
+         * 	]
     	 */
         'accounts' => [
             'example' => [
@@ -12,7 +17,7 @@
         ],
 
 		/*
-		 *
+		 *	The providers are the same as mailers in the mail config
 		 */
         'provider' => [
             'default' => [
