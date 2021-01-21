@@ -85,32 +85,32 @@ Now import `Mailer` in your mail class.
 use Queueable, SerializesModels, Mailer;
 ```
 
-Finally set the mailer in your mail class in the `__construct` or in `build`.
+Finally set the mailer in your mail class in the `__construct` or in `build`. You need to give it the same name as above
 ```php
-$this->setMailer();
+$this->setMailer('example');
 ```
 
 Examples:
 ```php
     public function __construct()
     {
-        $this->setMailer();
+        $this->setMailer('example');
     }
 ```
 ```php
     public function build()
     {
-        $this->setMailer()->view('mail.example');
+        $this->setMailer('example')->view('mail.example');
     }
 ```
 
 You can also use queue with a queue name. The default queue name is: mail. To use queue replace `setMailer` with `setMailerWithQueue` 
 > Note to use `setMailerWithQueue` you need to implement `ShouldQueue` in your mail class
 ```php
-$this->setMailerWithQueue();
+$this->setMailerWithQueue('example');
 ```
 
 You can also specify your own queue name.
 ```php
-$this->setMailerWithQueue('queue name');
+$this->setMailerWithQueue('example', 'queue name');
 ```
