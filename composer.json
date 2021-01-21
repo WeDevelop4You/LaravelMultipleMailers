@@ -20,9 +20,9 @@
     "extra": {
         "laravel": {
             "providers": [
-                "WeDevelop4You\\LaravelMultipleMailers\\MailerServiceProvider"
+                "WeDevelop4You\\LaravelMultipleMailers\\Providers\\MailerServiceProvider"
             ]
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "dev"
 }

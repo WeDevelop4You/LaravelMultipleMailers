@@ -2,8 +2,8 @@
 
 namespace WeDevelop4You\LaravelMultipleMailers;
 
-use Exception;
 use Illuminate\Support\ServiceProvider;
+use WeDevelop4You\LaravelMultipleMailers\Exceptions\MailerProviderNotFoundException;
 
 class MailerServiceProvider extends ServiceProvider
 {
@@ -17,22 +17,25 @@ class MailerServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     * @throws Exception
-     */
+	/**
+	 * Bootstrap services.
+	 *
+	 * @return void
+	 * @throws MailerProviderNotFoundException
+	 */
     public function boot()
     {
-		$this->publishes([
-			__DIR__.'/../config/mailer.php' => config_path('mailer.php'),
+    	$this->publishes([
+			__DIR__ . '/../config/mailer.php' => config_path('mailer.php'),
 		]);
 
 		self::setMailerConfig();
     }
 
-    private static function setMailerConfig()
+	/**
+	 * @throws MailerProviderNotFoundException
+	 */
+	private static function setMailerConfig()
 	{
 		$mailers = config("mailer.accounts", []);
 
@@ -48,7 +51,7 @@ class MailerServiceProvider extends ServiceProvider
 
 				config(["mail.mailers.{$name}" => $newMailer]);
 			} else {
-				throw new Exception('The provider is not set in the config file mailer');
+				throw new MailerProviderNotFoundException("The provider \"{$providerName}\" is not found in the config file mailer");
 			}
 		}
 	}
