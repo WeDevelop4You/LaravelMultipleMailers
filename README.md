@@ -16,7 +16,7 @@ composer require wedevelop4you/laravel-multiple-mailers
 Publish the config file by running:
 
 ```
-php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\Providers\MailerServiceProvider" --tag=config
+php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\MailerServiceProvider" --tag=config
 ```
 
 ## Config
