@@ -3,6 +3,12 @@
     "description": "Adds multiple mailers",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "mailer",
+        "multiple",
+        "smtp"
+    ],
     "authors": [
         {
             "name": "Pascal Huberts",
@@ -24,5 +30,6 @@
             ]
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
