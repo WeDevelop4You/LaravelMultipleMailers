@@ -7,9 +7,13 @@ PHP 7.0 or higher and tested on Laravel 7 are required.
 
 Require this package with composer.
 
-`composer require wedevelop4you/laravel-multiple-mailers`
+```
+composer require wedevelop4you/laravel-multiple-mailers
+```
 
 Publish the config file by running:
 
-`php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\Providers\MailerServiceProvider" --tag=config`
+```
+php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\Providers\MailerServiceProvider" --tag=config
+```
 
