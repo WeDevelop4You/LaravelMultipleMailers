@@ -46,7 +46,7 @@ php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\Mail
 | name mail config | object | true  | null |
 | username | string | true  | null |
 | password | string | true | null |
-| name | string | false  | MAIL_FROM_NAME .env |
+| name | string | false  | MAIL_FROM_NAME in your .env file|
 | produces | string | false  | default |
 
 ### Providers config:
