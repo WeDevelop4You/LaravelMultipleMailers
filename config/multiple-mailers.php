@@ -28,5 +28,14 @@
                 'timeout' => null,
                 'auth_mode' => null,
             ],
-        ]
+        ],
+
+        /*
+         *  'worker' => The name of the queue worker. (The default name of the worker is 'default')
+         *  'default' => Always use the queue worker name on mail classes with ShouldQueue.
+         */
+        'queue' => [
+            'worker' => '',
+            'default' => false,
+        ],
     ];

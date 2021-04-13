@@ -3,9 +3,7 @@
 I made this package because I wanted to use multiple mails. It is a small simple package to use multiple mails in Laravel. I'm not really going to expand it any further. Only if I want to add functions myself. You are free to use the package and here is a little explanation of how to use it.
 
 ## Installation
-PHP 7.0 or higher and Laravel 7 are required.
-
-> Its only tested on Laravel 7
+PHP 7.0 or higher and Laravel 7 or higher are required.
 
 Require this package with composer.
 
@@ -16,10 +14,12 @@ composer require wedevelop4you/laravel-multiple-mailers
 Publish the config file by running:
 
 ```
-php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\MailerServiceProvider" --tag=config
+php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\Providers\MailerServiceProvider" --tag=config
 ```
 
 ## Config
+
+config the mailers in: `multiple-mailer`
 
 ### Accounts config:
 
@@ -67,6 +67,21 @@ php artisan vendor:publish --provider="WeDevelop4You\LaravelMultipleMailers\Mail
     ]
 ```
 
+### Queue config:
+
+```php
+     /*
+     *  'worker' => The name of the queue worker. (The default name of the worker is 'default')
+     *  'default' => Always use the queue worker name on mail classes with ShouldQueue.
+     */
+    'queue' => [
+        'worker' => '',
+        'default' => false,
+    ]
+```
+
+If you want to queue all the mail on the same worker name but except one or more, Than you can set `onQueue` in your mail class. The code will not override the queue name.
+
 ## How to use it
 
 When sending an email you need to set the mailer. The mailer name is the name you set in the `mailer` config.
@@ -80,37 +95,30 @@ Example:
 Mail::mailer('example')->to('test@example.org')->send(new ExampleMail());
 ```
 
-Now import `Mailer` in your mail class.
+Now import `MultipleMailer` in your mail class.
 ```php
-use Queueable, SerializesModels, Mailer;
+use Queueable, SerializesModels, MultipleMailer;
 ```
 
-Finally set the mailer in your mail class in the `__construct` or in `build`. You need to give it the same name as above
+Finally set the mailer name in your mail class in the `__construct` or in your own function. You need to give it the same name as above
 ```php
-$this->setMailer('example');
+$this->setMultipleMailerName('example');
 ```
 
 Examples:
 ```php
     public function __construct()
     {
-        $this->setMailer('example');
-    }
-```
-```php
-    public function build()
-    {
-        $this->setMailer('example')->view('mail.example');
+        $this->setMultipleMailerName('example');
     }
 ```
 
-You can also use queue with a queue name. The default queue name is: mail. To use queue replace `setMailer` with `setMailerWithQueue` 
-> Note to use `setMailerWithQueue` you need to implement `ShouldQueue` in your mail class
-```php
-$this->setMailerWithQueue('example');
-```
+## Exceptions
 
-You can also specify your own queue name.
-```php
-$this->setMailerWithQueue('example', 'queue name');
-```
+### `MailerAccountNotFoundException`
+
+throws when the mailer name doesn't exist in the config file.
+
+### `MailerProviderNotFoundException`
+
+throws when the provider name doesn't exist in the config file.

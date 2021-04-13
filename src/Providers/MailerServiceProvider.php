@@ -14,7 +14,7 @@ class MailerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-		$this->mergeConfigFrom(__DIR__.'/../../config/mailer.php', 'mailer');
+		$this->mergeConfigFrom(__DIR__.'/../../config/multiple-mailers.php', 'multiple-mailers');
     }
 
 	/**
@@ -25,32 +25,26 @@ class MailerServiceProvider extends ServiceProvider
 	 */
     public function boot()
     {
-    	$this->publishes([__DIR__.'/../../config/mailer.php' => config_path('mailer.php')], 'config');
+        $this->publishes([__DIR__.'/../../config/multiple-mailers.php' => config_path('multiple-mailers.php')], 'config');
 
-		self::setMailerConfig();
+        $mailers = config("multiple-mailers.accounts", []);
+
+        foreach ($mailers as $name => $mailer) {
+            $mailer = (object) $mailer;
+
+            $providerName = $mailer->provider ?? 'default';
+            $provider = config("multiple-mailers.provider.{$providerName}", false);
+
+            if ($provider) {
+                $newMailer = array_merge($provider, [
+                    'username' => $mailer->username,
+                    'password' => $mailer->password,
+                ]);
+
+                config(["mail.mailers.{$name}" => $newMailer]);
+            } else {
+                throw new MailerProviderNotFoundException("The provider \"{$providerName}\" is not found in the config file mailer");
+            }
+        }
     }
-
-	/**
-	 * @throws MailerProviderNotFoundException
-	 */
-	private static function setMailerConfig()
-	{
-		$mailers = config("mailer.accounts", []);
-
-		foreach ($mailers as $name => $mailer) {
-			$providerName = $mailer['provider'] ?? 'default';
-			$provider = config("mailer.provider.{$providerName}", false);
-
-			if ($provider) {
-				$newMailer = array_merge($provider, [
-					'username' => $mailer['username'],
-					'password' => $mailer['password'],
-				]);
-
-				config(["mail.mailers.{$name}" => $newMailer]);
-			} else {
-				throw new MailerProviderNotFoundException("The provider \"{$providerName}\" is not found in the config file mailer");
-			}
-		}
-	}
 }
